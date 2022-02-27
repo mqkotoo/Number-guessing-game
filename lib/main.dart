@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:number_guess_app/game_page.dart';
+import 'package:number_guess_app/result_page.dart';
+// import 'package:number_guess_app/result_page.dart';
 import 'how_to_play.dart';
 
 void main() {
@@ -16,6 +18,7 @@ class MyApp extends StatelessWidget {
       home: MyHomePage(),
       routes:{
         '/home': (context) => MyHomePage(),
+        '/game': (context) => const GamePage(),
       },
     );
   }
@@ -74,10 +77,14 @@ class MyHomePage extends StatelessWidget {
                 child: ElevatedButton(
                   onPressed: () {
                   //  スタートボタンを押した時の画面遷移
-                    Navigator.push(
-                      context,
-                      // MaterialPageRoute(builder: (context) => const GamePage(inputText: null,)),
-                      MaterialPageRoute(builder: (context) => const GamePage()),
+                  //   Navigator.push(
+                  //     context,
+                  //     // MaterialPageRoute(builder: (context) => const GamePage(inputText: null,)),
+                  //     MaterialPageRoute(builder: (context) => const GamePage()),
+                  //   );
+                    Navigator.pushNamed(
+                        context,
+                        '/game'
                     );
                   },
                   child: Text(

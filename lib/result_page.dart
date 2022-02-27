@@ -66,7 +66,7 @@ class ResultPageState extends State<ResultPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  // ホームに戻るボタン
+                  // リトライ
                   SizedBox(
                     width: 160,
                     height: 45,
@@ -86,7 +86,7 @@ class ResultPageState extends State<ResultPage> {
                       ),
                       onPressed: () {
                         //  ボタンを押した時の画面遷移
-                        Navigator.pop(context);
+                        Navigator.of(context).pushNamedAndRemoveUntil("/game", ModalRoute.withName("/"));
                       },
                     ),
                   ),
@@ -97,7 +97,10 @@ class ResultPageState extends State<ResultPage> {
                     child: ElevatedButton(
                       onPressed: () {
                         //  ボタンを押した時の画面遷移
-                        Navigator.of(context).pushReplacementNamed("/home");
+                        // Navigator.of(context).pushReplacementNamed("/home");
+
+                        // ホームまで一括でポップする
+                        Navigator.of(context).popUntil(ModalRoute.withName("/"));
                       },
                       child: Text(
                         "ホームに戻る",

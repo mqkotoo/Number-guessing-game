@@ -39,7 +39,7 @@ class _GamePageState extends State<GamePage> {
 
   int inputText = 0 ;
 
-  int answer = Random().nextInt(101);
+  int answer = Random().nextInt(100);
 
   @override
   void initState() {
@@ -62,7 +62,9 @@ class _GamePageState extends State<GamePage> {
   @override
   Widget build(BuildContext context) {
     // リトライした時にもう一回ランダムな答えを生成する
-    // answer = Random().nextInt(101) + 1;
+    //   answer = Random().nextInt(101) + 1;
+    //   _counter = 0;
+      // inputText = 0 ;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.redAccent,
@@ -101,9 +103,6 @@ class _GamePageState extends State<GamePage> {
                 child: Form(
                   key: _formKey,
                   child: TextFormField(
-                    // onChanged: (value) {
-                    //   inputText = int.parse(value);
-                    // },
 
                     onEditingComplete: () async {
                       // myController.clear();
