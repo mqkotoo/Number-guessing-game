@@ -39,7 +39,7 @@ class _GamePageState extends State<GamePage> {
 
   int inputText = 0 ;
 
-  int answer = Random().nextInt(100);
+  int answer = Random().nextInt(101) + 1;
 
   @override
   void initState() {
