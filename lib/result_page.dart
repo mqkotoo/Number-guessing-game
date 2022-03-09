@@ -53,43 +53,45 @@ class ResultPageState extends State<ResultPage> {
               ],
             ),
             // 結果発表
-            Expanded(
-              flex: 8,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 100),
-                    child: Text(
-                      "あなたの回数は$counter回です！",
-                      style: resultTextStyle,
+            Padding(
+              padding: const EdgeInsets.only(top: 350.0),
+              child: Container(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 100),
+                      child: Text(
+                        "あなたの回数は$counter回です！",
+                        style: resultTextStyle,
+                      ),
                     ),
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      // リトライ
-                      resultPageButton(
-                        buttonText: 'リトライ',
-                        icon: Icons.autorenew,
-                        onPressed: () {
-                          // ホームの前までpopして、そこにゲーム画面を差し込む
-                          Navigator.of(context).pushNamedAndRemoveUntil(
-                              "/game", ModalRoute.withName("/"));
-                        },
-                      ),
-                      // ホームに戻るボタン
-                      resultPageButton(
-                        buttonText: 'ホーム',
-                        icon: Icons.home,
-                        onPressed: () {
-                          // ホームまで一括でポップする
-                          Navigator.of(context).popUntil(ModalRoute.withName("/"));
-                        },
-                      ),
-                    ],
-                  ),
-                ],
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        // リトライ
+                        resultPageButton(
+                          buttonText: 'リトライ',
+                          icon: Icons.autorenew,
+                          onPressed: () {
+                            // ホームの前までpopして、そこにゲーム画面を差し込む
+                            Navigator.of(context).pushNamedAndRemoveUntil(
+                                "/game", ModalRoute.withName("/"));
+                          },
+                        ),
+                        // ホームに戻るボタン
+                        resultPageButton(
+                          buttonText: 'ホーム',
+                          icon: Icons.home,
+                          onPressed: () {
+                            // ホームまで一括でポップする
+                            Navigator.of(context).popUntil(ModalRoute.withName("/"));
+                          },
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
           ],
