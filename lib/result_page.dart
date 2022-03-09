@@ -1,6 +1,9 @@
 import 'package:confetti/confetti.dart';
 import 'package:flutter/material.dart';
 import 'package:number_guess_app/main.dart';
+import 'package:number_guess_app/result_button_page.dart';
+
+import 'constants.dart';
 
 class ResultPage extends StatefulWidget {
   ResultPage(this.counter);
@@ -35,89 +38,61 @@ class ResultPageState extends State<ResultPage> {
     return Scaffold(
       body: Container(
         // 背景画像
-        decoration: const BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage('assets/images/result.png'),
-              fit: BoxFit.cover,
-            )
-        ),
-        child: Center(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              // 紙吹雪ここで出してる
-              ConfettiWidget(
-                confettiController: _controller,
-                emissionFrequency: 0.5,
-                blastDirectionality: BlastDirectionality.explosive,
-              ),
-
-              // 結果発表
-              Padding(
-                padding: const EdgeInsets.only(bottom: 100),
-                child: Text("あなたの回数は$counter回です！",
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 30,
-                      color: Colors.black,
-                    ),
+        decoration: resultBackgroundDecoration,
+        child: Column(
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                // 紙吹雪ここで出してる
+                ConfettiWidget(
+                  confettiController: _controller,
+                  emissionFrequency: 0.5,
+                  blastDirectionality: BlastDirectionality.explosive,
                 ),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              ],
+            ),
+            // 結果発表
+            Expanded(
+              flex: 8,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  // リトライ
-                  SizedBox(
-                    width: 160,
-                    height: 45,
-                    child: ElevatedButton.icon(
-                      icon: const Icon(
-                        Icons.autorenew,
-                        color: Colors.white,
-                      ),
-                      label: const Text('リトライ',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 20,
-                        ),
-                      ),
-                      style: ElevatedButton.styleFrom(
-                        primary: Colors.black45,
-                      ),
-                      onPressed: () {
-                        //  ボタンを押した時の画面遷移
-                        Navigator.of(context).pushNamedAndRemoveUntil("/game", ModalRoute.withName("/"));
-                      },
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 100),
+                    child: Text(
+                      "あなたの回数は$counter回です！",
+                      style: resultTextStyle,
                     ),
                   ),
-                  // ホームに戻るボタン
-                  SizedBox(
-                    width: 155,
-                    height: 45,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        //  ボタンを押した時の画面遷移
-                        // Navigator.of(context).pushReplacementNamed("/home");
-
-                        // ホームまで一括でポップする
-                        Navigator.of(context).popUntil(ModalRoute.withName("/"));
-                      },
-                      child: Text(
-                        "ホームに戻る",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 20,
-                        ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      // リトライ
+                      resultPageButton(
+                        buttonText: 'リトライ',
+                        icon: Icons.autorenew,
+                        onPressed: () {
+                          // ホームの前までpopして、そこにゲーム画面を差し込む
+                          Navigator.of(context).pushNamedAndRemoveUntil(
+                              "/game", ModalRoute.withName("/"));
+                        },
                       ),
-                      style: ElevatedButton.styleFrom(
-                        primary: Colors.black45, //ボタンの背景色
+                      // ホームに戻るボタン
+                      resultPageButton(
+                        buttonText: 'ホーム',
+                        icon: Icons.home,
+                        onPressed: () {
+                          // ホームまで一括でポップする
+                          Navigator.of(context).popUntil(ModalRoute.withName("/"));
+                        },
                       ),
-                    ),
+                    ],
                   ),
                 ],
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
