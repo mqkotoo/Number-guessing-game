@@ -20,7 +20,7 @@ class _GamePageState extends State<GamePage> {
   var myController = TextEditingController();
   late FocusNode addAnswerFocusNode;
   int inputText = 0;
-  int answer = Random().nextInt(101) + 1;
+  int answer = Random().nextInt(100) + 1;
 
   @override
   void initState() {
@@ -66,7 +66,8 @@ class _GamePageState extends State<GamePage> {
                 child: answerInputFom(
                     formKey: _formKey,
                     addAnswerFocusNode: addAnswerFocusNode,
-                    myController: myController),
+                    myController: myController
+                ),
               ),
 
               //回答を送信するボタン　↓

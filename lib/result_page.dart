@@ -37,6 +37,7 @@ class ResultPageState extends State<ResultPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
+        // height:  MediaQuery.of(context).size.height,
         // 背景画像
         decoration: resultBackgroundDecoration,
         child: Column(
@@ -53,45 +54,46 @@ class ResultPageState extends State<ResultPage> {
               ],
             ),
             // 結果発表
-            Padding(
-              padding: const EdgeInsets.only(top: 350.0),
-              child: Container(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 100),
-                      child: Text(
-                        "あなたの回数は$counter回です！",
-                        style: resultTextStyle,
+            Container(
+              margin: EdgeInsets.only(top: 350),
+              child: Column(
+                children: [
+                  Text(
+                    "あなたの回数は$counter回です！",
+                    style: resultTextStyle,
+                  ),
+                  SizedBox(
+                    height: 100.0,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      // リトライ
+                      resultPageButton(
+                        buttonText: 'リトライ',
+                        icon: Icons.autorenew,
+                        onPressed: () {
+                          // ホームの前までpopして、そこにゲーム画面を差し込む
+                          Navigator.of(context).pushNamedAndRemoveUntil(
+                              "/game", ModalRoute.withName("/"));
+                        },
                       ),
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        // リトライ
-                        resultPageButton(
-                          buttonText: 'リトライ',
-                          icon: Icons.autorenew,
-                          onPressed: () {
-                            // ホームの前までpopして、そこにゲーム画面を差し込む
-                            Navigator.of(context).pushNamedAndRemoveUntil(
-                                "/game", ModalRoute.withName("/"));
-                          },
-                        ),
-                        // ホームに戻るボタン
-                        resultPageButton(
-                          buttonText: 'ホーム',
-                          icon: Icons.home,
-                          onPressed: () {
-                            // ホームまで一括でポップする
-                            Navigator.of(context).popUntil(ModalRoute.withName("/"));
-                          },
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
+                      // ホームに戻るボタン
+                      resultPageButton(
+                        buttonText: 'ホーム',
+                        icon: Icons.home,
+                        onPressed: () {
+                          // ホームまで一括でポップする
+                          // Navigator.of(context).popUntil(ModalRoute.withName("/"));
+
+                          // スタックを全部ぶっ飛ばしてホームのページに画面遷移する戻らないからキーボードでないんじゃね
+                          Navigator.of(context,)
+                              .pushNamedAndRemoveUntil('/', (route) => false);
+                        },
+                      ),
+                    ],
+                  ),
+                ],
               ),
             ),
           ],
